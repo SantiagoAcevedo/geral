@@ -1,0 +1,41 @@
+% Channel ID to read data from 
+readChannelID = CHANNELID; 
+% Temperature Field ID 
+myFieldID = 1; 
+% One day date range
+oneDay = [datetime('yesterday') datetime('today')];
+
+% Channel Read API Key 
+
+readAPIKey = 'XXXXXXXXXXXX'; 
+
+temperatureDay1 = thingSpeakRead(readChannelID,'Fields',myFieldID, ...
+                                 'dateRange', oneDay, 'ReadKey',readAPIKey); 
+temperatureDay2 = thingSpeakRead(readChannelID,'Fields',myFieldID, ...
+                                 'dateRange',oneDay-days(1),'ReadKey',readAPIKey); 
+temperatureDay3 = thingSpeakRead(readChannelID,'Fields',myFieldID, ...
+                                'dateRange', oneDay-days(2),'ReadKey',readAPIKey); 
+temperatureDay4 = thingSpeakRead(readChannelID,'Fields',myFieldID, ...
+                                'dateRange', oneDay-days(3),'ReadKey',readAPIKey); 
+temperatureDay5 = thingSpeakRead(readChannelID,'Fields',myFieldID, ...
+                                'dateRange', oneDay-days(4),'ReadKey',readAPIKey); 
+temperatureDay6 = thingSpeakRead(readChannelID,'Fields',myFieldID, ...
+                                'dateRange', oneDay-days(5),'ReadKey',readAPIKey); 
+temperatureDay7 = thingSpeakRead(readChannelID,'Fields',myFieldID, ...
+                                'dateRange', oneDay-days(6),'ReadKey',readAPIKey); 								
+
+% Create array of durations 
+myTimes1 = minutes(1:length(temperatureDay1));
+myTimes2 = minutes(1:length(temperatureDay2));
+myTimes3 = minutes(1:length(temperatureDay3));
+myTimes4 = minutes(1:length(temperatureDay4));
+myTimes5 = minutes(1:length(temperatureDay5));
+myTimes6 = minutes(1:length(temperatureDay6));
+myTimes7 = minutes(1:length(temperatureDay7));
+
+% Visualize the data
+plot(myTimes1,temperatureDay1, myTimes2,temperatureDay2, myTimes3,temperatureDay3, myTimes4,temperatureDay4, myTimes5,temperatureDay5, myTimes6,temperatureDay6, myTimes7,temperatureDay7);
+legend({'Dia 1','Dia 2','Dia 3','Dia 4','Dia 5', 'Dia 6', 'Dia 7'});
+xlabel('Minutos');
+ylabel('Temperatura °C');
+title('Temperatura de 7 dias');
